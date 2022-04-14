@@ -99,4 +99,3 @@ RUN chmod 644 /etc/docker/daemon.json
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash"]
 
-COPY ./docker /root/docker

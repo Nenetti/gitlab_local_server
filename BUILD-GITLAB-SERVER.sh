@@ -11,7 +11,6 @@ sudo mkdir -p \
   /srv/gitlab-server/volumes/runner/volumes/config \
   /srv/gitlab-server/volumes/runner/docker
 
-docker-compose up -d
-sleep 1
-docker exec gitlab-server bash -c "docker-compose -f /root/docker/gitlab/docker-compose.yml up"
+docker-compose up
+#docker exec gitlab-server bash -c "docker-compose -f /root/docker/gitlab/docker-compose.yml up"
 #docker-compose stop

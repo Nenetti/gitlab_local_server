@@ -11,6 +11,9 @@ services:
         - FROM_IMAGE=ubuntu:20.04
     volumes:
       - type: bind
+        source: ./docker
+        target: /root/docker
+      - type: bind
         source: /srv/gitlab-server/volumes
         target: /srv
       - type: bind

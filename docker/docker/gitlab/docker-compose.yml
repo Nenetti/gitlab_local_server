@@ -16,14 +16,16 @@ services:
      ports:
        - '9011:9011'
        - '2224:22'
-     volumes:
-       - type: bind
-         source: /srv/gitlab/config
-         target: /etc/gitlab
-       - type: bind
-         source: /srv/gitlab/logs
-         target: /var/log/gitlab
-       - type: bind
-         source: /srv/gitlab/data
-         target: /var/opt/gitlab
+#     volumes:
+#       - type: bind
+#         source: /srv/gitlab/config
+#         target: /etc/gitlab
+#       - type: bind
+#         source: /srv/gitlab/logs
+#         target: /var/log/gitlab
+#       - type: bind
+#         source: /srv/gitlab/data
+#         target: /var/opt/gitlab
      privileged: true
+     command: bash
+     tty: true
