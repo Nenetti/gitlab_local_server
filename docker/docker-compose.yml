@@ -1,0 +1,32 @@
+version: "3.4"
+
+services:
+  gitlab-server:
+    hostname: gitlab
+    image: gitlab-server:20.04
+    container_name: gitlab-server
+    build:
+      context: ./
+      args:
+        - FROM_IMAGE=ubuntu:20.04
+    volumes:
+      - type: bind
+        source: /srv/gitlab-server/volumes
+        target: /srv
+      - type: bind
+        source: /srv/gitlab-server/docker
+        target: /var/lib/docker
+    ports:
+#      - '9010:9010'
+      - '9011:9011'
+#      - '2224:2224'
+#    restart: always
+    privileged: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
