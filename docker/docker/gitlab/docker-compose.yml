@@ -4,28 +4,30 @@ services:
    server:
      hostname: local
      image: 'gitlab/gitlab-ce:latest'
-     restart: always
      hostname: gitlab-ce
      container_name: gitlab-local-server
      environment:
      # https://docs.gitlab.com/ee/install/docker.html
        GITLAB_OMNIBUS_CONFIG: |
-          external_url 'http://10.40.20.74:9011'
+          external_url "http://localhost:9011"
           gitlab_rails['gitlab_shell_ssh_port'] = 2224
           gitlab_rails['initial_root_password'] = "root1234"
      ports:
        - '9011:9011'
        - '2224:22'
-#     volumes:
-#       - type: bind
-#         source: /srv/gitlab/config
-#         target: /etc/gitlab
-#       - type: bind
-#         source: /srv/gitlab/logs
-#         target: /var/log/gitlab
-#       - type: bind
-#         source: /srv/gitlab/data
-#         target: /var/opt/gitlab
-     privileged: true
-     command: bash
-     tty: true
+       - '80:80'
+       - '443:443'
+     volumes:
+       - type: bind
+         source: /srv/gitlab/config
+         target: /etc/gitlab
+       - type: bind
+         source: /srv/gitlab/logs
+         target: /var/log/gitlab
+       - type: bind
+         source: /srv/gitlab/data
+         target: /var/opt/gitlab
+     restart: always
+#     privileged: true
+#     command: bash
+#     tty: true

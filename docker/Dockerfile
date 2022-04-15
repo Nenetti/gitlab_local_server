@@ -93,9 +93,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 
-COPY scripts/daemon.json /etc/docker/daemon.json
-RUN chmod 644 /etc/docker/daemon.json
-
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash"]
 
