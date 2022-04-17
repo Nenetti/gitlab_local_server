@@ -17,8 +17,8 @@ services:
       - type: bind
         source: /srv/runner/docker
         target: /var/lib/docker
-    ports:
-      - '9012:9012'
+#    ports:
+#      - '9012:9012'
     privileged: true
     deploy:
       resources:
