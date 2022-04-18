@@ -9,13 +9,15 @@ services:
      environment:
      # https://docs.gitlab.com/ee/install/docker.html
        GITLAB_OMNIBUS_CONFIG: |
-          external_url "http://gitlab.example.com:8080"
+          external_url "http://gitlab.example.com"
           gitlab_rails['initial_root_password'] = "root1234"
           gitlab_rails['gitlab_shell_ssh_port'] = 2224
-#          nginx['listen_port'] = 8080
-#          letsencrypt['enable'] = false
-#          nginx['redirect_http_to_https_port'] = 80
+          nginx['enable'] = true
+          nginx['listen_port'] = 9010
 #          nginx['redirect_http_to_https'] = true
+#          letsencrypt['enable'] = false
+#          external_url "http://localhost"
+#          nginx['redirect_http_to_https_port'] = 80
 #          external_url "http://gitlab.example.com"
 #          external_url "https://localhost"
 #          external_url "http://gitlab.example.com"
@@ -29,7 +31,7 @@ services:
 #          mattermost_external_url "https://mattermost.example.com"
 #     network_mode: host
      ports:
-       - "8080:8080"
+       - "9010:9010"
        - '2224:22'
      volumes:
        - /srv/gitlab/config:/etc/gitlab
@@ -37,7 +39,7 @@ services:
        - /srv/gitlab/data:/var/opt/gitlab
      networks:
        fixed_ip:
-         ipv4_address: 192.168.0.100
+         ipv4_address: 192.168.20.74
   #       - ./scripts/resolv.conf:/etc/resolv.conf
 #     restart: always
 #     privileged: true
@@ -54,4 +56,5 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.0.0/24
+        - subnet: 192.168.20.0/24
+          gateway: 192.168.20.1
