@@ -20,8 +20,8 @@ services:
         source: /srv/gitlab-server/docker
         target: /var/lib/docker
     ports:
-      - '9010:9010'
-      - '2224:2224'
+      - "9010:80"
+      - '2224:22'
 #    restart: always
     privileged: true
     tty: true
@@ -32,3 +32,14 @@ services:
           - driver: nvidia
             count: all
             capabilities: [gpu]
+    networks:
+      fixed_ip:
+        ipv4_address: 192.168.20.74
+
+networks:
+  fixed_ip:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.20.0/24
+          gateway: 192.168.20.1

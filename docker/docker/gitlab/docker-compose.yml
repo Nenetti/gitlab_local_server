@@ -5,56 +5,17 @@ services:
      hostname: local
      image: 'gitlab/gitlab-ce:latest'
      hostname: gitlab-ce
-     container_name: gitlab-local-server
+     container_name: server
      environment:
      # https://docs.gitlab.com/ee/install/docker.html
        GITLAB_OMNIBUS_CONFIG: |
           external_url "http://gitlab.example.com"
           gitlab_rails['initial_root_password'] = "root1234"
-          gitlab_rails['gitlab_shell_ssh_port'] = 2224
+          gitlab_rails['gitlab_shell_ssh_port'] = 22
           nginx['enable'] = true
-          nginx['listen_port'] = 9010
-#          nginx['redirect_http_to_https'] = true
-#          letsencrypt['enable'] = false
-#          external_url "http://localhost"
-#          nginx['redirect_http_to_https_port'] = 80
-#          external_url "http://gitlab.example.com"
-#          external_url "https://localhost"
-#          external_url "http://gitlab.example.com"
-#          nginx['redirect_http_to_https_port'] = 80
-#          pages_nginx['redirect_http_to_https'] = true
-#          pages_external_url "https://pages.example.com"
-#          pages_nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.example.com.crt"
-#          pages_nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.example.com.key"
-#          nginx['redirect_http_to_https_port'] = 80
-#          registry_external_url "https://registry.example.com"
-#          mattermost_external_url "https://mattermost.example.com"
-#     network_mode: host
-     ports:
-       - "9010:9010"
-       - '2224:22'
+          nginx['listen_port'] = 80
+     network_mode: host
      volumes:
        - /srv/gitlab/config:/etc/gitlab
        - /srv/gitlab/logs:/var/log/gitlab
        - /srv/gitlab/data:/var/opt/gitlab
-     networks:
-       fixed_ip:
-         ipv4_address: 192.168.20.74
-  #       - ./scripts/resolv.conf:/etc/resolv.conf
-#     restart: always
-#     privileged: true
-#     command: bash
-#     tty: true
-#
-#     networks:
-#       default:
-#         aliases:
-#           - gitlab.example.com
-
-networks:
-  fixed_ip:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.20.0/24
-          gateway: 192.168.20.1

@@ -5,7 +5,7 @@ services:
     hostname: local
     image: gitlab-local-runner
     restart: always
-    container_name: gitlab-local-runner
+    container_name: runner
     build:
       context: ./
       args:
@@ -17,8 +17,7 @@ services:
       - type: bind
         source: /srv/runner/docker
         target: /var/lib/docker
-#    ports:
-#      - '9012:9012'
+    network_mode: host
     privileged: true
     deploy:
       resources:
